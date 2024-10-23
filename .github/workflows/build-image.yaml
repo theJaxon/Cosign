@@ -23,7 +23,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y wget
-          wget https://github.com/sigstore/cosign/releases/download/${{ env.COSIGN_VERSION }}/cosign-linux-amd64 -O ${{ env.COSIGN_BINAARY_PATH }}
+          wget https://github.com/sigstore/cosign/releases/download/v${{ env.COSIGN_VERSION }}/cosign-linux-amd64 -O ${{ env.COSIGN_BINAARY_PATH }}
           chmod +x ${{ env.COSIGN_BINAARY_PATH }}
 
       # https://github.com/docker/login-action
