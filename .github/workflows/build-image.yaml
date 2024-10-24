@@ -8,6 +8,7 @@ env:
   COSIGN_VERSION: 2.4.1
   COSIGN_BINAARY_PATH: /usr/local/bin/cosign
   COSIGN_KEY: ${{ secrets.COSIGN_KEY }}
+  COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
 
 jobs:
   build-push:
