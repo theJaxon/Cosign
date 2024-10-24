@@ -21,12 +21,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install cosign
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget
-          wget https://github.com/sigstore/cosign/releases/download/v${{ env.COSIGN_VERSION }}/cosign-linux-amd64 -O ${{ env.COSIGN_BINAARY_PATH }}
-          chmod +x ${{ env.COSIGN_BINAARY_PATH }}
+      - name: Set up cosign
+        uses: sigstore/cosign-installer@main
+
+      # - name: Install cosign
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install -y wget
+      #     wget https://github.com/sigstore/cosign/releases/download/v${{ env.COSIGN_VERSION }}/cosign-linux-amd64 -O ${{ env.COSIGN_BINAARY_PATH }}
+      #     chmod +x ${{ env.COSIGN_BINAARY_PATH }}
 
       # https://github.com/docker/login-action
       - name: Log into registry ${{ env.REGISTRY }}
@@ -45,8 +48,7 @@ jobs:
         with:
           push: true
           tags: ${{ env.REGISTRY }}/thejaxon/ubuntu-24-nginx
+          platforms: linux/amd64
 
       - name: Sign container image
-        run: |
-          echo $COSIGN_KEY > cosign.key
-          cosign sign --key cosign.key --upload=true ${{ env.REGISTRY }}/thejaxon/ubuntu-24-nginx
+        run: cosign sign --key env://COSIGN_KEY --upload=true ${{ env.REGISTRY }}/thejaxon/ubuntu-24-nginx
