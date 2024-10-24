@@ -45,4 +45,6 @@ jobs:
           tags: ${{ env.REGISTRY }}/thejaxon/ubuntu-24-nginx
 
       - name: Sign container image
-        run: cosign sign --key ${{ secrets.COSIGN_KEY }} --upload=true ${{ env.REGISTRY }}/thejaxon/ubuntu-24-nginx
+        run: |
+          echo ${{ secrets.COSIGN_KEY }} > cosign.key
+          cosign sign --key cosign.key --upload=true ${{ env.REGISTRY }}/thejaxon/ubuntu-24-nginx
