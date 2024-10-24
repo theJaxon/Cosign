@@ -7,6 +7,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
   COSIGN_VERSION: 2.4.1
   COSIGN_BINAARY_PATH: /usr/local/bin/cosign
+  COSIGN_KEY: ${{ secrets.COSIGN_KEY }}
 
 jobs:
   build-push:
@@ -46,5 +47,5 @@ jobs:
 
       - name: Sign container image
         run: |
-          echo ${{ secrets.COSIGN_KEY }} > cosign.key
+          echo $COSIGN_KEY > cosign.key
           cosign sign --key cosign.key --upload=true ${{ env.REGISTRY }}/thejaxon/ubuntu-24-nginx
