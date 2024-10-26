@@ -10,6 +10,9 @@ Digitally signing container images ensure that our images have not been tampered
 - Finally an admission controller can be used (Kyverno for example) to always check whether the image being pulled is digitally signed.
 
 ```bash
+# Install Kyverno if it's not already installed
+kubectl create -f https://github.com/kyverno/kyverno/releases/download/v1.11.1/install.yaml
+
 # Password to be used for our private key
 export COSIGN_PASSWORD=<passwd>
 
@@ -30,5 +33,4 @@ cosign sign --key <key> --upload=true <image-uri>
 
 ### References 
 1. [cosign- tutorial](https://github.com/avisi-cloud/cosign-tutorial)
-
 2. [Kyverno Sigstore policy](https://kyverno.io/docs/writing-policies/verify-images/sigstore/)
