@@ -30,3 +30,5 @@ cosign sign --key <key> --upload=true <image-uri>
 
 ### References 
 1. [cosign- tutorial](https://github.com/avisi-cloud/cosign-tutorial)
+
+2. [Kyverno Sigstore policy](https://kyverno.io/docs/writing-policies/verify-images/sigstore/)
