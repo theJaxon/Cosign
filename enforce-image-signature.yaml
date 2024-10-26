@@ -1,0 +1,32 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: enforce-image-signature
+spec:
+  validationFailureAction: Enforce
+  background: false
+  webhookTimeoutSeconds: 30
+  failurePolicy: Fail
+  rules:
+    - name: enforce-image-signature
+      match:
+        any:
+        - resources:
+            kinds:
+              - Pod
+      verifyImages:
+      - imageReferences:
+        - "ghcr.io/thejaxon/ubuntu-24-nginx*"
+        attestors:
+        - count: 1
+          entries:
+          - keys:
+              publicKeys: |-
+                -----BEGIN PUBLIC KEY-----
+                MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEitZSjC1Mg0dlFGMcoTwkiRhQV6lZ
+                JkblaT5GeQh+1L7rZ4uaGA/SXOBigEfDmDdTF1t4QtlAuJnt5IF0LEjB9Q==
+                -----END PUBLIC KEY-----
+              # https://kyverno.io/docs/writing-policies/verify-images/sigstore/#ignoring-tlogs-and-sct-verification
+              rekor:
+                ignoreTlog: true
+                url: https://rekor.sigstore.dev
