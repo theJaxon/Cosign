@@ -29,4 +29,4 @@ cosign sign --key <key> --upload=true <image-uri>
 ---
 
 ### References 
-1.[Cosign- tutorial](https://github.com/avisi-cloud/cosign-tutorial)
+1. [cosign- tutorial](https://github.com/avisi-cloud/cosign-tutorial)
