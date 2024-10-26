@@ -1,5 +1,5 @@
 # Cosign
-Signing container images with Cosign
+Signing container images with Cosign and using Kyverno for enforcing the signature. 
 
 ### Why should you sign container images
 Digitally signing container images ensure that our images have not been tampered with once they have been pushed to the container registry.
