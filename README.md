@@ -7,7 +7,7 @@ Digitally signing container images ensure that our images have not been tampered
 ### How it works
 - Cosign is the CLI tool used to generate the public/private key pair.
 - It will also be used in the CI to sign container images after they are pushed to container registry.
-- Finally an admission controller can be used (Kyverno for example) to always check whether the image being pulled is digitally signed.
+- Finally an admission controller can be used (Kyverno or [connaisseur](https://github.com/sse-secure-systems/connaisseur) for example) to always check whether the image being pulled is digitally signed.
 
 ```bash
 # Install Kyverno if it's not already installed
