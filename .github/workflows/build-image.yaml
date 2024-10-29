@@ -1,11 +1,12 @@
 name: Build and sign container image
 
-on: workflow_dispatch
+on:
+  - push
+  - workflow_dispatch
 
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  COSIGN_VERSION: 2.4.1
   COSIGN_KEY: ${{ secrets.COSIGN_KEY }}
   COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
 
