@@ -56,4 +56,4 @@ jobs:
           cache: 'true'
 
       - name: Sign container image
-        run: cosign sign --key env://COSIGN_KEY --upload=true ${{ env.REGISTRY }}/thejaxon/ubuntu-24-nginx
+        run: cosign sign --yes --key env://COSIGN_KEY --upload=true ${{ env.REGISTRY }}/thejaxon/ubuntu-24-nginx
