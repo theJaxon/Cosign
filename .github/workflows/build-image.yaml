@@ -49,5 +49,6 @@ jobs:
 
   trivy-scan-image:
     uses: thejaxon/workflows/.github/workflows/trivy-scan.yaml@main
+    needs: build-push
     with:
       image_name: ubuntu-24-nginx
