@@ -44,16 +44,10 @@ jobs:
           tags: ${{ env.REGISTRY }}/thejaxon/ubuntu-24-nginx
           platforms: linux/amd64
 
-      - name: Scan container image with Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@0.28.0
-        with:
-          image-ref: '${{ env.REGISTRY }}/thejaxon/ubuntu-24-nginx'
-          format: 'table'
-          exit-code: '1'
-          ignore-unfixed: true
-          vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
-          cache: 'true'
-
       - name: Sign container image
         run: cosign sign --yes --key env://COSIGN_KEY --upload=true ${{ env.REGISTRY }}/thejaxon/ubuntu-24-nginx
+
+  trivy-scan-image:
+    uses: thejaxon/workflows/.github/workflows/trivy-scan.yaml@main
+    with:
+      image_name: ubuntu-24-nginx
